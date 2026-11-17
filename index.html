@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المتميز ستور — كل اللينكات</title>
+<!--
+  نظام التصميم:
+  - الألوان: خلفية فحمية غامقة #1F262C (من خلفية اللوجو)، أحمر البراند #E5222B، أبيض
+  - الخط: IBM Plex Sans Arabic للنصوص (مع Segoe UI كخطة بديلة)، Changa للعناوين
+  - الإيقاع: عمود مركزي بعرض 400px، أزرار بارتفاع 64px، مسافات 14px
+  - الأيقونات: SVG دائري بلون كل منصة، تتفاعل عند الهوفر
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Changa:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1F262C;
+    --surface: #29323A;
+    --surface-hover: #2F3942;
+    --line: rgba(255,255,255,.07);
+    --brand-red: #E5222B;
+    --text: #F5F7F8;
+    --muted: #97A3AD;
+    --tiktok: #101014;
+    --whatsapp: #25D366;
+    --phone: #3A8DDE;
+    --instapay-a: #5B2D90;
+    --instapay-b: #B24BF3;
+    --fawry: #FFC220;
+    --location: #E5222B;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    display:flex; justify-content:center;
+    min-height:100%;
+    position:relative;
+    overflow-x:hidden;
+  }
+  /* توهج خفيف جداً بلون البراند خلف اللوجو — مش خلفية متدرجة صارخة */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(420px 300px at 50% -60px, rgba(229,34,43,.16), transparent 70%),
+      radial-gradient(500px 400px at 50% 110%, rgba(229,34,43,.07), transparent 70%);
+    pointer-events:none;
+  }
+
+  .page{
+    width:100%; max-width:400px;
+    padding: 44px 22px 40px;
+    display:flex; flex-direction:column; align-items:center;
+    position:relative; z-index:1;
+  }
+
+  /* ---- الترويسة ---- */
+  header{ text-align:center; margin-bottom:22px; }
+  .logo{
+    width:150px; height:150px;
+    object-fit:contain;
+    filter: drop-shadow(0 14px 30px rgba(0,0,0,.45));
+    animation: pop .6s cubic-bezier(.2,.9,.3,1.2) both;
+  }
+  h1{
+    font-family:"Changa", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    font-weight:800; font-size:30px;
+    margin-top:12px; letter-spacing:.3px;
+    animation: fadeUp .5s .12s ease both;
+  }
+  h1 .accent{ color: var(--brand-red); }
+  .tagline{
+    color: var(--muted); font-size:14.5px; margin-top:4px; line-height:1.6;
+    animation: fadeUp .5s .2s ease both;
+  }
+
+  /* ---- شارة صغيرة زي شارة "تو" في اللوجو ---- */
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background: var(--brand-red); color:#fff;
+    font-size:12px; font-weight:700;
+    padding:5px 13px; border-radius:999px;
+    margin-bottom:16px;
+    animation: fadeUp .5s .28s ease both;
+  }
+
+  /* ---- اللينكات ---- */
+  .links{ width:100%; display:flex; flex-direction:column; gap:12px; }
+  .link{
+    display:flex; align-items:center; gap:14px;
+    background: var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding: 11px 14px;
+    min-height:64px;
+    text-decoration:none; color:var(--text);
+    font-family:inherit; font-size:inherit;
+    text-align:right; width:100%;
+    cursor:pointer;
+    transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    animation: fadeUp .55s ease both;
+  }
+  .link:nth-child(1){ animation-delay:.34s; }
+  .link:nth-child(2){ animation-delay:.42s; }
+  .link:nth-child(3){ animation-delay:.5s; }
+  .link:nth-child(4){ animation-delay:.58s; }
+  .link:nth-child(5){ animation-delay:.66s; }
+
+  .link:hover{
+    transform: translateY(-3px);
+    background: var(--surface-hover);
+  }
+  .link:active{ transform: translateY(-1px) scale(.99); }
+
+  .icon{
+    width:46px; height:46px; flex:0 0 46px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition: background .18s ease, box-shadow .18s ease, color .18s ease;
+  }
+  .icon svg{ width:24px; height:24px; display:block; }
+
+  .txt{ flex:1; min-width:0; }
+  .txt b{ display:block; font-size:17px; font-weight:700; line-height:1.3; }
+  .txt small{ display:block; color:var(--muted); font-size:12.5px; margin-top:2px; direction:ltr; text-align:right; }
+  .link.whatsapp .txt small,
+  .link.instapay .txt small,
+  .link.location .txt small{ direction:rtl; }
+  .txt small .num{ direction:ltr; unicode-bidi:embed; }
+
+  .arrow{
+    width:22px; height:22px; flex:0 0 22px;
+    color: var(--muted);
+    transition: transform .18s ease, color .18s ease;
+  }
+  .arrow svg{ width:100%; height:100%; }
+  .link:hover .arrow{ transform: translateX(-4px); color:var(--text); }
+
+  /* لون كل منصة يظهر عند الهوفر */
+  .link.tiktok .icon{ background:#3A3A42; color:#fff; }
+  .link.tiktok:hover{ border-color: rgba(255,255,255,.25); box-shadow: 0 10px 26px rgba(0,0,0,.35); }
+  .link.tiktok:hover .icon{ background: var(--tiktok); box-shadow: 0 0 0 3px rgba(255,255,255,.08); }
+
+  .link.whatsapp .icon{ background:#1F3D2C; color:var(--whatsapp); }
+  .link.whatsapp:hover{ border-color: rgba(37,211,102,.45); box-shadow: 0 10px 26px rgba(37,211,102,.12); }
+  .link.whatsapp:hover .icon{ background: var(--whatsapp); color:#fff; box-shadow: 0 0 0 3px rgba(37,211,102,.2); }
+
+  .link.phone .icon{ background:#22303C; color:var(--phone); }
+  .link.phone:hover{ border-color: rgba(58,141,222,.5); box-shadow: 0 10px 26px rgba(58,141,222,.14); }
+  .link.phone:hover .icon{ background: var(--phone); color:#fff; box-shadow: 0 0 0 3px rgba(58,141,222,.18); }
+
+  .link.instapay .icon{ background:#2E2340; color:#D9B8FF; }
+  .link.instapay:hover{ border-color: rgba(178,75,243,.5); box-shadow: 0 10px 26px rgba(178,75,243,.15); }
+  .link.instapay:hover .icon{
+    background: linear-gradient(135deg, var(--instapay-a), var(--instapay-b));
+    color:#fff; box-shadow: 0 0 0 3px rgba(178,75,243,.18);
+  }
+  .link.instapay.copied{ border-color: rgba(37,211,102,.5); }
+  .link.instapay.copied .txt small{ color: var(--whatsapp); }
+
+  .link.location .icon{ background:#3A2226; color:#FF7B81; }
+  .link.location:hover{ border-color: rgba(229,34,43,.55); box-shadow: 0 10px 26px rgba(229,34,43,.14); }
+  .link.location:hover .icon{ background: var(--location); color:#fff; box-shadow: 0 0 0 3px rgba(229,34,43,.2); }
+
+  /* ---- وسائل الدفع ---- */
+  .payhead{
+    margin: 22px 0 10px;
+    color: var(--muted); font-size:12.5px; font-weight:700; letter-spacing:.4px;
+    animation: fadeUp .55s .74s ease both;
+  }
+  .payrow{ display:flex; gap:8px; width:100%; animation: fadeUp .55s .8s ease both; }
+  .paychip{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+    background: var(--surface); border:1px solid var(--line);
+    border-radius:12px; padding:9px 6px;
+    font-size:13px; font-weight:700; color:var(--text);
+  }
+  .paychip i{ width:8px; height:8px; border-radius:50%; flex:0 0 8px; }
+  .paychip.insta i{ background: linear-gradient(135deg, var(--instapay-a), var(--instapay-b)); }
+  .paychip.voda i{ background:#E60000; }
+  .paychip.fawry i{ background: var(--fawry); }
+
+  /* ---- شريط سفلي ---- */
+  footer{
+    margin-top:24px; text-align:center;
+    animation: fadeUp .55s .88s ease both;
+  }
+  .phone-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--muted); text-decoration:none;
+    font-size:13.5px; font-weight:500;
+    padding:8px 16px; border-radius:999px;
+    border:1px dashed rgba(255,255,255,.14);
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .phone-chip:hover{ color:var(--text); border-color: rgba(229,34,43,.55); }
+  .phone-chip .dot{ width:7px; height:7px; border-radius:50%; background:var(--whatsapp); box-shadow:0 0 8px var(--whatsapp); }
+
+  /* ---- حركات ---- */
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+  @keyframes pop{ from{ opacity:0; transform:scale(.85);} to{ opacity:1; transform:scale(1);} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <img class="logo" src="Logo.png" alt="لوجو المتميز ستور">
+    <h1>المتميز <span class="accent">ستور</span></h1>
+    <p class="tagline">بيع واستبدال وصيانة واكسسوارات الموبايل</p>
+  </header>
+
+  <span class="badge">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.72-4.35-9.33-8.11C.9 10.34 1.77 6.6 4.89 5.35c1.9-.76 4.04-.28 5.36 1.18L12 8.4l1.75-1.87c1.32-1.46 3.46-1.94 5.36-1.18 3.12 1.25 3.99 4.99 2.22 7.54C18.72 16.65 12 21 12 21Z"/></svg>
+    تابعنا في كل حتة
+  </span>
+
+  <nav class="links">
+
+    <!-- تيك توك -->
+    <a class="link tiktok" href="https://www.tiktok.com/@el.motamayez?_r=1&_t=ZS-9BTtCx24HuX" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.7-2.56 5.7-5.7V9.01a8.733 8.733 0 0 0 4.77 1.72v-3.1a5.53 5.53 0 0 1-3.72-1.81Z"/></svg>
+      </span>
+      <span class="txt">
+        <b>تيك توك</b>
+        <small>@el.motamayez</small>
+      </span>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
+    </a>
+
+    <!-- واتساب -->
+    <a class="link whatsapp" href="https://wa.me/2001126576008" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      </span>
+      <span class="txt">
+        <b>واتساب</b>
+        <small>كلمنا دلوقتي — <span class="num">01126576008</span></small>
+      </span>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
+    </a>
+
+    <!-- تليفون -->
+    <a class="link phone" href="tel:+201005223583">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02Z"/></svg>
+      </span>
+      <span class="txt">
+        <b>اتصل بينا</b>
+        <small><span class="num">01005223583</span></small>
+      </span>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
+    </a>
+
+    <!-- انستاباي: نسخ الرقم للحوالة -->
+    <button class="link instapay" id="instapay" type="button" data-num="01126576008">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="M14 3.5 17.5 7 14 10.5"/><path d="M20 17H7"/><path d="M10 13.5 6.5 17l3.5 3.5"/></svg>
+      </span>
+      <span class="txt">
+        <b>انستاباي</b>
+        <small data-orig="دوس لنسخ الرقم للحوالة — <span class='num'>01126576008</span>">دوس لنسخ الرقم للحوالة — <span class="num">01126576008</span></small>
+      </span>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="6" width="13" height="12" rx="2.5"/><path d="M3 9v9a2.5 2.5 0 0 0 2.5 2.5H17"/></svg></span>
+    </button>
+
+    <!-- مكاننا -->
+    <a class="link location" href="https://maps.app.goo.gl/6DnyqJ6gikgm625K8" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/></svg>
+      </span>
+      <span class="txt">
+        <b>مكاننا</b>
+        <small>الشيخ زايد — الحي 13، عمارة 63، خلف الشهر العقاري</small>
+      </span>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
+    </a>
+
+  </nav>
+
+  <p class="payhead">وسائل الدفع المتاحة</p>
+  <div class="payrow">
+    <span class="paychip insta"><i></i>انستاباي</span>
+    <span class="paychip voda"><i></i>فودافون كاش</span>
+    <span class="paychip fawry"><i></i>فوري</span>
+  </div>
+
+
+</main>
+
+<script>
+  // زرار انستاباي: نسخ الرقم للحوالة مع رسالة تأكيد
+  const btn = document.getElementById("instapay");
+  const sub = btn.querySelector("small");
+  const origText = sub.dataset.orig;
+  let t = null;
+  btn.addEventListener("click", async () => {
+    const num = btn.dataset.num;
+    try {
+      await navigator.clipboard.writeText(num);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = num;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select(); document.execCommand("copy");
+      ta.remove();
+    }
+    sub.innerHTML = "اتنسخ &mdash; حوّل دلوقتي على انستاباي";
+    btn.classList.add("copied");
+    clearTimeout(t);
+    t = setTimeout(() => {
+      sub.innerHTML = origText;
+      btn.classList.remove("copied");
+    }, 2400);
+  });
+</script>
+</body>
+</html>
